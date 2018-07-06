@@ -6,7 +6,11 @@
   <body>
   	<th:block th:replace="fragments/headernav"></th:block>
   	<div class="container pt-3">
-  		<th:block th:replace="fragments/home/welcomemsg"></th:block>
+  		<div class="row justify-content-center">
+  			<div class="col-lg-4 col-md-6 col-sm-6 col-8">
+	  			<th:block th:replace="fragments/login/loginform"></th:block>
+	  		</div>  		
+  		</div>
   	</div>
   </body>
 </html>

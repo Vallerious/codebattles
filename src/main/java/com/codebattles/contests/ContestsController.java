@@ -1,13 +1,13 @@
-package com.codebattles.register;
+package com.codebattles.contests;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class RegisterController {
+public class ContestsController {
 
-  @RequestMapping("/register")
+  @RequestMapping("/contests")
   public String index() {
-    return "register/index";
+    return "contests";
   }
 }

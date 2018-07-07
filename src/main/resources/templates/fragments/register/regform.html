@@ -1,0 +1,9 @@
+<form action="/register">
+	<legend class="text-center">Register</legend>
+	<th:block th:replace="fragments/form/xinput (type='text', id='username-field', placeholder='Enter username', label='Username', name='username')"></th:block>
+  	<th:block th:replace="fragments/form/xinput (type='email', id='email-field', placeholder='Enter email', label='Email address', name='email')"></th:block>
+  	<th:block th:replace="fragments/form/xinput (type='email', id='repeat-email-field', placeholder='Enter email again', label='Repeat email address', name='repeatEmail')"></th:block>
+  	<th:block th:replace="fragments/form/xinput (type='password', id='password-field', placeholder='Enter password', label='Password', name='password')"></th:block>
+  	<th:block th:replace="fragments/form/xinput (type='password', id='repeat-password-field', placeholder='Repeat password', label='Repeat password', name='repeatPassword')"></th:block>
+  	<button type="submit" class="btn btn-primary">Register</button>
+</form>

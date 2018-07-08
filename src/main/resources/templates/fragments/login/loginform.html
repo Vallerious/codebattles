@@ -1,11 +1,12 @@
 <form th:action="@{/login}" method="post">
 	<legend class="text-center">Login</legend>
+	<div th:if="${successMessage != null}" th:text="${successMessage}" class="alert alert-success"></div>
 	<div th:if="${param.error}">
         <div class="alert alert-danger">
-            Invalid username and password.
+            Invalid email and password.
         </div>
     </div>
-  	<th:block th:replace="fragments/form/xinput (type='text', id='username-field', placeholder='Enter username', label='Username', name='username')"></th:block>
+  	<th:block th:replace="fragments/form/xinput (type='email', id='email-field', placeholder='Enter email', label='Email', name='email')"></th:block>
   	<th:block th:replace="fragments/form/xinput (type='password', id='password-field', placeholder='Enter password', label='Password', name='password')"></th:block>
   	<button type="submit" class="btn btn-primary">Login</button>
 </form>

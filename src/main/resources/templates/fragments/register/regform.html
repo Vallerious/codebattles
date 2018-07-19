@@ -1,4 +1,4 @@
-<form th:action="@{/register}" method="post" th:object="${user}" autocomplete="off">
+<form th:action="@{/register}" method="post" th:object="${data}" autocomplete="off">
 	<legend class="text-center">Register</legend>
 	<label th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
 								class="alert alert-danger"></label>

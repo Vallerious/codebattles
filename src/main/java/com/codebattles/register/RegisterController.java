@@ -1,5 +1,6 @@
 package com.codebattles.register;
 
+import com.codebattles.BaseController;
 import com.codebattles.user.User;
 import com.codebattles.user.UserService;
 
@@ -13,20 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class RegisterController {
+public class RegisterController extends BaseController {
   
   @Autowired
   private UserService userService;
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
   public ModelAndView register() {
-    ModelAndView modelAndView = new ModelAndView();
-    modelAndView.setViewName("register/index");
-
-    User user = new User();
-    modelAndView.addObject("user", user);
-
-    return modelAndView;
+    return this.basicViewWithData("register", new User());
   }
   
   @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -40,7 +35,7 @@ public class RegisterController {
       }
 
       userExists = userService.findUserByUsername(user.getUsername());
-      
+
       if (userExists != null) {
         bindingResult.rejectValue("username", "error.user", "There is already a user registered with this username");
       }

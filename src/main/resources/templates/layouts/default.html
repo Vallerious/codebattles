@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      	<title th:text="'Codebattles - ' + ${title}"></title>
+    		<th:block th:replace="fragments/head"></th:block>
+  </head>
+  <body>
+  	<th:block th:replace="fragments/headernav"></th:block>
+  	<th:block th:replace="${viewName}"></th:block>
+  </body>
+</html>

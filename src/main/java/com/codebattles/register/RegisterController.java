@@ -45,7 +45,8 @@ public class RegisterController extends BaseController {
       } else {
           userService.saveUser(user);
           modelAndView.addObject("successMessage", "User has been registered successfully");
-          modelAndView.setViewName("login/index");
+          modelAndView.setViewName("layouts/default");
+          modelAndView.addObject("viewName", "login");
       }
 
       return modelAndView;

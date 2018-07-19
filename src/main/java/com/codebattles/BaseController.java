@@ -1,5 +1,7 @@
 package com.codebattles;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -9,6 +11,13 @@ public class BaseController {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("layouts/default");
     modelAndView.addObject("viewName", viewName);
+    
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    boolean hasAdminRole = authentication.getAuthorities().stream()
+        .anyMatch(r -> r.getAuthority().equals("ADMIN"));
+    System.out.println(hasAdminRole);
+    modelAndView.addObject("isAdmin", hasAdminRole);
+
     return modelAndView;
   }
   

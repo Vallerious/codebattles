@@ -15,7 +15,7 @@ public class BaseController {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     boolean hasAdminRole = authentication.getAuthorities().stream()
         .anyMatch(r -> r.getAuthority().equals("ADMIN"));
-    System.out.println(hasAdminRole);
+
     modelAndView.addObject("isAdmin", hasAdminRole);
 
     return modelAndView;

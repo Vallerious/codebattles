@@ -2,6 +2,8 @@ package com.codebattles.user;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +24,8 @@ public class UserService implements IUserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     
+    
+    
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -39,6 +43,11 @@ public class UserService implements IUserService {
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+      return this.userRepository.findAll();
     }
 
 }

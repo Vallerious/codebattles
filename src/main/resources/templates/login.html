@@ -1,5 +1,3 @@
-<div class="row justify-content-center">
-	<div class="col-lg-4 col-md-6 col-sm-6 col-8">
-		<th:block th:replace="fragments/login/loginform"></th:block>
-	</div>  		
+<div class="col-lg-4 col-md-6 col-sm-6 col-8" th:fragment="common(data)">
+	<th:block th:replace="fragments/login/loginform"></th:block>
 </div>

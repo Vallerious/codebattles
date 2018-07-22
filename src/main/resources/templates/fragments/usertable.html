@@ -9,8 +9,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="user : ${data}">
-				<th scope="row" th:text="${user.id}"></th>
+			<tr th:each="user, iter : ${data}">
+				<th scope="row" th:text="${isAdmin ? user.id : (iter.index + 1)}"></th>
 			    <td th:text="${user.username}"></td>
 			    <td th:text="${user.email}"></td>
 			    <td th:text="${user.rating}"></td>

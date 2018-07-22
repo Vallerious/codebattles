@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +20,22 @@ import com.codebattles.user.UserRepository;
 @Service("userService")
 public class UserService implements IUserService {
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
+
     private RoleRepository roleRepository;
-    @Autowired
+
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     
-    
+    @Autowired
+    public UserService(
+        UserRepository userRepository,
+        RoleRepository roleRepository,
+        BCryptPasswordEncoder bCryptPasswordEncoder
+    ) {
+      this.userRepository = userRepository;
+      this.roleRepository = roleRepository;
+      this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
     
     @Override
     public User findUserByEmail(String email) {
@@ -46,8 +57,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-      return this.userRepository.findAll();
+    public List<User> getAllUsers(Sort sort) {
+      return (List<User>) this.userRepository.findAll(sort);
+    }
+
+    @Override
+    public Page<User> listAllByPage(Pageable pageable) {
+      return this.userRepository.findAll(pageable);
     }
 
 }

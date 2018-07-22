@@ -1,8 +1,8 @@
 package com.codebattles.user;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,7 +11,7 @@ public class UserViewModel {
   @Autowired
   private UserService userService;
   
-  public List<User> getAllUsersForTable() {
-    return this.userService.getAllUsers();
+  public Page<User> getAllUsersForTable(Pageable pageable) {
+    return this.userService.listAllByPage(pageable);
   }
 }

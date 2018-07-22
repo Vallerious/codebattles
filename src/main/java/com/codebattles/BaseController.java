@@ -12,8 +12,13 @@ public class BaseController {
     modelAndView.setViewName("layouts/default");
     modelAndView.addObject("viewName", viewName);
     
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    boolean hasAdminRole = authentication.getAuthorities().stream()
+    Authentication authentication = SecurityContextHolder
+        .getContext()
+        .getAuthentication();
+
+    boolean hasAdminRole = authentication
+        .getAuthorities()
+        .stream()
         .anyMatch(r -> r.getAuthority().equals("ADMIN"));
 
     modelAndView.addObject("isAdmin", hasAdminRole);

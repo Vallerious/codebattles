@@ -1,0 +1,18 @@
+<div th:fragment="problemtable(data)">
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Name</th>
+				<th scope="col">Solved by x people</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="problem, iter : ${data}">
+				<th scope="row" th:text="${iter.index + 1}"></th>
+			    <td><a th:href="@{'/practice/' + ${problem.id}}" th:text="${problem.name}"></a></td>
+			    <td th:text="${problem.solvedCount}"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

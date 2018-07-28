@@ -24,7 +24,7 @@ public class RankingController extends BaseController {
   @RequestMapping(value = "/ranking", method = RequestMethod.GET)
   public ModelAndView index(Pageable pageable) {
     Page<User> users = this.userViewModel.getAllUsersForTable(pageable);
-
+    
     return this.basicViewWithData("ranking", users);
   }
 }

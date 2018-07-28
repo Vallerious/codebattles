@@ -19,7 +19,6 @@ public class PagingSortingURLParamsInterceptor extends HandlerInterceptorAdapter
       
       if (queryString == null && request.getRequestURL().indexOf("ranking") > -1) {
         response.sendRedirect("/ranking?page=0&size=" + PAGE_SIZE + "&sort=rating,desc");
-        return true;
       }
        
       return true;

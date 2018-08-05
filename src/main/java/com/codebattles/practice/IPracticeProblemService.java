@@ -7,5 +7,7 @@ public interface IPracticeProblemService {
   
   public PracticeProblem getProblem(String id);
   
-  public String[] checkProblem(String problemCode, String problemId, String problemName);
+  public String[] checkProblem(String problemCode, String problemId, String problemName, int testCase);
+  
+  public String[] checkProblems(String problemCode, String problemId, String problemName);
 }

@@ -45,7 +45,7 @@ public class PracticeController extends BaseController {
     String code = formData.get("initialSourceCode").get(0);
     String problemName = formData.get("practiceProblem.name").get(0);
 
-    String[] res = this.practiceProblemService.checkProblem(code, id, problemName);
+    String[] res = this.practiceProblemService.checkProblems(code, id, problemName);
     
     System.out.print(res[0] + " ; " + res[1]);
     

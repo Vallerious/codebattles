@@ -37,7 +37,7 @@ public class PracticeProblemService implements IPracticeProblemService {
   }
 
   @Override
-  public String[] checkProblem(String problemCode, String problemId, String problemName) {
+  public String[] checkProblem(String problemCode, String problemId, String problemName, int testCase) {
     // Store code on disk with some random name
     String[] res = new String[2];
     Random random = new Random();
@@ -76,7 +76,7 @@ public class PracticeProblemService implements IPracticeProblemService {
       }
       
       ClassLoader classLoader = getClass().getClassLoader();
-      String in = FileUtil.readAsString(new File(classLoader.getResource("problems/" + problemName + "/input/test01.txt").getFile()));
+      String in = FileUtil.readAsString(new File(classLoader.getResource("problems/" + problemName + "/input/test0" + testCase + ".txt").getFile()));
       Process process = runtime.exec("java -classpath src/main/solutions " + fileName + " " + in);
       
       BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -94,7 +94,7 @@ public class PracticeProblemService implements IPracticeProblemService {
           return res;
         }
         
-        String correctOutput = FileUtil.readAsString(new File(classLoader.getResource("problems/" + problemName + "/output/test01.txt").getFile()));
+        String correctOutput = FileUtil.readAsString(new File(classLoader.getResource("problems/" + problemName + "/output/test0" + testCase +".txt").getFile()));
         
         if (correctOutput.equals(line)) {
           System.out.println("Correct result");
@@ -117,12 +117,41 @@ public class PracticeProblemService implements IPracticeProblemService {
     }
     
     // Delete the files 
-//    file.delete();
-//    File classFile = new File(rootPath + "/src/main/solutions/" + fileName + ".class");
-//    classFile.delete();
+    file.delete();
+    File classFile = new File(rootPath + "/src/main/solutions/" + fileName + ".class");
+    classFile.delete();
 
     // return true if the output matches the result from the code run
     return res;
+  }
+
+  @Override
+  public String[] checkProblems(String problemCode, String problemId, String problemName) {
+    String[] reString = new String[2];
+    int successes = 0;
+
+    for (int i = 1; i <= 5; i++) {
+      String[] res = this.checkProblem(problemCode, problemId, problemName, i);
+      
+      if (res[0].equals("success")) {
+        successes++;
+      } else {
+        if (!res[1].equals("Incorrect result!")) {
+          reString = res;
+          return reString;
+        }
+      }
+    }
+    
+    if (successes == 5) {
+      reString[0] = "success";
+    } else {
+      reString[0] = "fail";
+      reString[1] = successes + "/5 correct Answers"; 
+    }
+    
+    return reString;
+   
   }
 
 }

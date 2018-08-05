@@ -20,10 +20,20 @@ public class PracticeProblem {
   
   private String name;
   
-  @Column(name = "solved_count", columnDefinition = "Decimal(10, 2) default '100.00'")
+  @Column(name = "solved_count", columnDefinition = "Decimal(10, 2) default '0'")
   private Long solvedCount;
   
   private String description;
+  
+  private Long points;
+
+  public Long getPoints() {
+    return points;
+  }
+
+  public void setPoints(Long points) {
+    this.points = points;
+  }
 
   public String getId() {
     return id;

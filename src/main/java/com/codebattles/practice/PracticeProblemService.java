@@ -20,4 +20,9 @@ public class PracticeProblemService implements IPracticeProblemService {
     return this.practiceProblemRepository.findAll();
   }
 
+  @Override
+  public PracticeProblem getProblem(String id) {
+    return this.practiceProblemRepository.getOne(id);
+  }
+
 }

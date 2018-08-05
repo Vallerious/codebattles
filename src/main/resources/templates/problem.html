@@ -1,0 +1,14 @@
+<div th:fragment="common(data)">
+	<h1 th:text="${data.practiceProblem.name}"></h1>
+	<p th:text="${data.practiceProblem.description}"></p>
+	
+	<form th:method="POST">
+		<div class="form-group">
+	    		<label for="solution">Solution</label>
+		    <textarea class="form-control" id="solution" rows="10" th:field="${data.initialSourceCode}"></textarea>
+	  	</div>
+	  	<div class="form-group text-center">
+	  		<button class="btn btn-primary">Submit</button>
+	  	</div>
+	</form>
+</div>

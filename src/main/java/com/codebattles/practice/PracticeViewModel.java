@@ -13,6 +13,16 @@ public class PracticeViewModel {
   private String initialSourceCode;
   
   private PracticeProblem practiceProblem;
+  
+  private String error;
+
+  public String getError() {
+    return error;
+  }
+
+  public void setError(String error) {
+    this.error = error;
+  }
 
   public PracticeViewModel() {
     ClassLoader classLoader = getClass().getClassLoader();

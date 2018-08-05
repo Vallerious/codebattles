@@ -63,6 +63,18 @@ public class PracticeProblemService implements IPracticeProblemService {
     try {
       Process compileProcess = runtime.exec("javac src/main/solutions/" + fileName + ".java");
       compileProcess.waitFor();
+      
+      BufferedReader javaCompileError = new BufferedReader(new InputStreamReader(compileProcess.getErrorStream()));
+      
+      String compileErrString = javaCompileError.readLine();
+      
+      if (compileErrString != null) {
+        res[0] = "fail";
+        res[1] = compileErrString;
+        
+        return res;
+      }
+      
       ClassLoader classLoader = getClass().getClassLoader();
       String in = FileUtil.readAsString(new File(classLoader.getResource("problems/" + problemName + "/input/test01.txt").getFile()));
       Process process = runtime.exec("java -classpath src/main/solutions " + fileName + " " + in);

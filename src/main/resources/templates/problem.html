@@ -2,6 +2,10 @@
 	<h1 th:text="${data.practiceProblem.name}"></h1>
 	<p th:text="${data.practiceProblem.description}"></p>
 	
+	<div class="alert alert-danger" role="alert" th:text="${data.error}" th:if="${!data.error.isEmpty()}">
+  
+</div>	
+	
 	<form th:method="POST">
 		<div class="form-group">
 	    		<label for="solution">Solution</label>

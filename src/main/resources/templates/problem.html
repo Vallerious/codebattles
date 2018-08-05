@@ -7,6 +7,9 @@
 	    		<label for="solution">Solution</label>
 		    <textarea class="form-control" name="solution" id="solution" rows="10" th:field="${data.initialSourceCode}"></textarea>
 	  	</div>
+	  	<div class="form-group">
+	  		<input type="hidden" th:field="${data.practiceProblem.name}"/>
+	  	</div>
 	  	<div class="form-group text-center">
 	  		<button class="btn btn-primary">Submit</button>
 	  	</div>

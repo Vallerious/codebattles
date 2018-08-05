@@ -7,5 +7,5 @@ public interface IPracticeProblemService {
   
   public PracticeProblem getProblem(String id);
   
-  public boolean checkProblem(String problemCode, String problemId);
+  public String[] checkProblem(String problemCode, String problemId, String problemName);
 }

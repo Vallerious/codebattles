@@ -41,7 +41,11 @@ public class PracticeController extends BaseController {
   @RequestMapping(value = "/practice/{id}", method = RequestMethod.POST)
   public ModelAndView solveProblem(@PathVariable(value = "id") String id, @RequestBody MultiValueMap<String, String> formData) {
     String code = formData.get("initialSourceCode").get(0);
-    boolean res = this.practiceProblemService.checkProblem(code, id);
+    String problemName = formData.get("practiceProblem.name").get(0);
+
+    String[] res = this.practiceProblemService.checkProblem(code, id, problemName);
+    
+    System.out.print(res[0] + " ; " + res[1]);
     return this.basicView("results");
   }
 }

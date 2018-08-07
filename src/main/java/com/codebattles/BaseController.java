@@ -1,20 +1,26 @@
 package com.codebattles;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.codebattles.user.CodebattlesUser;
+import com.codebattles.user.UserService;
+
 @Controller
 public class BaseController {
+  
+  @Autowired
+  private UserService userService;
+  
   public ModelAndView basicView(String viewName) {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("layouts/default");
     modelAndView.addObject("viewName", viewName);
     
-    Authentication authentication = SecurityContextHolder
-        .getContext()
-        .getAuthentication();
+    Authentication authentication = this.getAuth();
 
     boolean hasAdminRole = authentication
         .getAuthorities()
@@ -31,5 +37,15 @@ public class BaseController {
     modelAndView.addObject("data", data);
     
     return modelAndView;
+  }
+  
+  public Authentication getAuth() {
+    return SecurityContextHolder
+        .getContext()
+        .getAuthentication();
+  }
+  
+  public CodebattlesUser getCurrentUser() {
+    return this.userService.findUserByEmail(this.getAuth().getName());
   }
 }

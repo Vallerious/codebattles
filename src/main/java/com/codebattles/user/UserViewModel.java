@@ -11,7 +11,7 @@ public class UserViewModel {
   @Autowired
   private UserService userService;
   
-  public Page<User> getAllUsersForTable(Pageable pageable) {
+  public Page<CodebattlesUser> getAllUsersForTable(Pageable pageable) {
     return this.userService.listAllByPage(pageable);
   }
 }

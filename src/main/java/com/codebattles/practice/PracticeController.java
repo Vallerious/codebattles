@@ -3,6 +3,7 @@ package com.codebattles.practice;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codebattles.BaseController;
+import com.codebattles.user.CodebattlesUser;
+import com.codebattles.user.IUserService;
 
 import net.bytebuddy.asm.Advice.This;
 
@@ -21,9 +24,12 @@ public class PracticeController extends BaseController {
   
   private IPracticeProblemService practiceProblemService;
   
+  private IUserService userService;
+  
   @Autowired
-  public PracticeController(IPracticeProblemService practiceProblemService) {
+  public PracticeController(IPracticeProblemService practiceProblemService, IUserService userService) {
     this.practiceProblemService = practiceProblemService;
+    this.userService = userService;
   }
   
   @RequestMapping(value = "/practice")
@@ -52,7 +58,19 @@ public class PracticeController extends BaseController {
     String status = res[0];
     
     if (status.equals("success")) {
-      return this.basicView("results");
+      PracticeProblem practiceProblem = this.practiceProblemService.getProblem(id);
+      CodebattlesUser user = this.getCurrentUser();
+      String userId = user.getId();
+      Long userPoints = user.getRating();
+      PracticeSuccessViewModel practiceSuccessViewModel = new PracticeSuccessViewModel();
+      practiceSuccessViewModel.setUserId(userId);
+      practiceSuccessViewModel.setPointsWon(practiceProblem.getPoints());
+      practiceSuccessViewModel.setTotalPoints(userPoints + practiceProblem.getPoints());
+      practiceSuccessViewModel.setProblemName(problemName);
+
+      this.userService.updateUserScore(user.getEmail(), practiceProblem.getPoints());
+      
+      return this.basicViewWithData("results", practiceSuccessViewModel);
     } else {
       ModelAndView modelAndView = new ModelAndView();
       modelAndView.setViewName("redirect:/practice/" + id);

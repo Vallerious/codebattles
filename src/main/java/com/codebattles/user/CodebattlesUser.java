@@ -1,5 +1,6 @@
 package com.codebattles.user;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,12 +21,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Transient;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
 import com.codebattles.role.Role;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class CodebattlesUser {
 
   @Id
   @GeneratedValue(generator = "uuid2")
@@ -56,7 +59,7 @@ public class User {
   private Set<Role> roles;
 
   @Min(0)
-  private int rating = 0;
+  private Long rating = 0L;
 
   public String getId() {
     return id;
@@ -106,11 +109,11 @@ public class User {
     this.roles = roles;
   }
 
-  public int getRating() {
+  public Long getRating() {
     return rating;
   }
 
-  public void setRating(int rating) {
+  public void setRating(Long rating) {
     this.rating = rating;
   }
   

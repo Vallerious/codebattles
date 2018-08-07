@@ -1,7 +1,7 @@
 package com.codebattles.register;
 
 import com.codebattles.BaseController;
-import com.codebattles.user.User;
+import com.codebattles.user.CodebattlesUser;
 import com.codebattles.user.UserService;
 
 import javax.validation.Valid;
@@ -21,13 +21,13 @@ public class RegisterController extends BaseController {
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
   public ModelAndView register() {
-    return this.basicViewWithData("register", new User());
+    return this.basicViewWithData("register", new CodebattlesUser());
   }
   
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+  public ModelAndView createNewUser(@Valid CodebattlesUser user, BindingResult bindingResult) {
       ModelAndView modelAndView = new ModelAndView();
-      User userExists = userService.findUserByEmail(user.getEmail());
+      CodebattlesUser userExists = userService.findUserByEmail(user.getEmail());
       if (userExists != null) {
           bindingResult
                   .rejectValue("email", "error.user",

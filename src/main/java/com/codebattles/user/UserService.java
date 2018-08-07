@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.codebattles.role.Role;
-import com.codebattles.user.User;
+import com.codebattles.user.CodebattlesUser;
 import com.codebattles.role.RoleRepository;
 import com.codebattles.user.UserRepository;
 
@@ -37,17 +37,17 @@ public class UserService implements IUserService {
     }
     
     @Override
-    public User findUserByEmail(String email) {
+    public CodebattlesUser findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
     
     @Override
-    public User findUserByUsername(String username) {
+    public CodebattlesUser findUserByUsername(String username) {
       return userRepository.findByUsername(username);
     }
 
     @Override
-    public void saveUser(User user) {
+    public void saveUser(CodebattlesUser user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("USER");
@@ -56,13 +56,22 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> getAllUsers(Sort sort) {
-      return (List<User>) this.userRepository.findAll(sort);
+    public List<CodebattlesUser> getAllUsers(Sort sort) {
+      return (List<CodebattlesUser>) this.userRepository.findAll(sort);
     }
 
     @Override
-    public Page<User> listAllByPage(Pageable pageable) {
+    public Page<CodebattlesUser> listAllByPage(Pageable pageable) {
       return this.userRepository.findAll(pageable);
+    }
+
+    @Override
+    public void updateUserScore(String email, Long points) {
+      CodebattlesUser user = this.userRepository.findByEmail(email);
+      
+      user.setRating(user.getRating() + points);
+      
+      this.userRepository.save(user);
     }
 
 }

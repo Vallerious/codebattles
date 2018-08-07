@@ -6,12 +6,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.codebattles.user.User;
+import com.codebattles.user.CodebattlesUser;
 
 public interface IUserService {
-    public List<User> getAllUsers(Sort sort);
-    public Page<User> listAllByPage(Pageable pageable);
-    public User findUserByEmail(String email);
-    public User findUserByUsername(String username);
-    public void saveUser(User user);
+    public List<CodebattlesUser> getAllUsers(Sort sort);
+    public Page<CodebattlesUser> listAllByPage(Pageable pageable);
+    public CodebattlesUser findUserByEmail(String email);
+    public CodebattlesUser findUserByUsername(String username);
+    public void saveUser(CodebattlesUser user);
+    public void updateUserScore(String email, Long points);
 }

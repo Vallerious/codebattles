@@ -10,4 +10,5 @@ public interface IPracticeProblemService {
   public String[] checkProblem(String problemCode, String problemId, String problemName, int testCase);
   
   public String[] checkProblems(String problemCode, String problemId, String problemName);
+
 }

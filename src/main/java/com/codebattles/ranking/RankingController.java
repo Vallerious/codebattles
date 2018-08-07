@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codebattles.BaseController;
-import com.codebattles.user.User;
+import com.codebattles.user.CodebattlesUser;
 import com.codebattles.user.UserViewModel;
 import com.fasterxml.jackson.databind.deser.Deserializers.Base;
 
@@ -23,7 +23,7 @@ public class RankingController extends BaseController {
 
   @RequestMapping(value = "/ranking", method = RequestMethod.GET)
   public ModelAndView index(Pageable pageable) {
-    Page<User> users = this.userViewModel.getAllUsersForTable(pageable);
+    Page<CodebattlesUser> users = this.userViewModel.getAllUsersForTable(pageable);
     
     return this.basicViewWithData("ranking", users);
   }

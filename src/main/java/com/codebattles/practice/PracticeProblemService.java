@@ -20,10 +20,13 @@ import org.springframework.util.StringUtils;
 public class PracticeProblemService implements IPracticeProblemService {
 
   private PracticeProblemRepository practiceProblemRepository;
+  
+  private SolvedRepository solvedRepository;
 
   @Autowired
-  public PracticeProblemService(PracticeProblemRepository practiceProblemRepository) {
+  public PracticeProblemService(PracticeProblemRepository practiceProblemRepository, SolvedRepository solvedRepository) {
     this.practiceProblemRepository = practiceProblemRepository;
+    this.solvedRepository = solvedRepository;
   }
 
   @Override
@@ -152,6 +155,16 @@ public class PracticeProblemService implements IPracticeProblemService {
     
     return reString;
    
+  }
+
+  @Override
+  public void incrementSolvedCount(String problemId) {
+    PracticeProblem practiceProblem = this.practiceProblemRepository.getOne(problemId);
+    
+    if (practiceProblem != null) {
+      practiceProblem.setSolvedCount(practiceProblem.getSolvedCount() + 1);
+      this.practiceProblemRepository.saveAndFlush(practiceProblem);
+    }
   }
 
 }

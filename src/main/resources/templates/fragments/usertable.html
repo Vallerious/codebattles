@@ -17,5 +17,5 @@
 			</tr>
 		</tbody>
 	</table>
-	<th:block th:replace="fragments/common/paging :: paging(totalPages=${data.getTotalElements() / data.getSize()})"></th:block>
+	<th:block th:replace="fragments/common/paging :: paging(totalPages=${data.getTotalElements() / data.getSize()}, url='ranking')"></th:block>
 </div>

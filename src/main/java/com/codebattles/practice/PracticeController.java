@@ -26,10 +26,13 @@ public class PracticeController extends BaseController {
   
   private IUserService userService;
   
+  private ISolvedService solvedService;
+  
   @Autowired
-  public PracticeController(IPracticeProblemService practiceProblemService, IUserService userService) {
+  public PracticeController(IPracticeProblemService practiceProblemService, IUserService userService, ISolvedService solvedService) {
     this.practiceProblemService = practiceProblemService;
     this.userService = userService;
+    this.solvedService = solvedService;
   }
   
   @RequestMapping(value = "/practice")
@@ -58,16 +61,21 @@ public class PracticeController extends BaseController {
     if (status.equals("success")) {
       PracticeProblem practiceProblem = this.practiceProblemService.getProblem(id);
       CodebattlesUser user = this.getCurrentUser();
+      boolean isProblemAlreadySolved = this.solvedService.checkIfProblemSolved(user, practiceProblem);
+      
+      if (!isProblemAlreadySolved) {
+        this.userService.updateUserScore(user.getEmail(), practiceProblem.getPoints());
+        this.solvedService.recordSolvedProblem(user, practiceProblem);
+        this.practiceProblemService.incrementSolvedCount(id);
+      }
 
       PracticeSuccessViewModel practiceSuccessViewModel = new PracticeSuccessViewModel(
-          practiceProblem.getPoints(),
+          isProblemAlreadySolved ? 0 : practiceProblem.getPoints(),
           user.getId(),
-          user.getRating() + practiceProblem.getPoints(),
+          isProblemAlreadySolved ? user.getRating() : user.getRating() + practiceProblem.getPoints(),
           problemName
       );
 
-      this.userService.updateUserScore(user.getEmail(), practiceProblem.getPoints());
-      
       return this.basicViewWithData("results", practiceSuccessViewModel);
     } else {
       ModelAndView modelAndView = new ModelAndView();

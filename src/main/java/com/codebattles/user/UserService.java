@@ -59,6 +59,11 @@ public class UserService implements IUserService {
     public List<CodebattlesUser> getAllUsers(Sort sort) {
       return (List<CodebattlesUser>) this.userRepository.findAll(sort);
     }
+    
+    @Override
+    public List<CodebattlesUser> getAllUsers() {
+      return (List<CodebattlesUser>) this.userRepository.findAll();
+    }
 
     @Override
     public Page<CodebattlesUser> listAllByPage(Pageable pageable) {

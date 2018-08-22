@@ -3,6 +3,8 @@ package com.codebattles.user;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +16,6 @@ import org.springframework.stereotype.Service;
 import com.codebattles.role.Role;
 import com.codebattles.user.CodebattlesUser;
 import com.codebattles.role.RoleRepository;
-import com.codebattles.user.UserRepository;
 
 @Service("userService")
 public class UserService implements IUserService {
@@ -77,6 +78,30 @@ public class UserService implements IUserService {
       user.setRating(user.getRating() + points);
       
       this.userRepository.save(user);
+    }
+
+    @Override
+    public void changeUserRole(String id, int inc) {
+      Optional<CodebattlesUser> optionalUser = this.userRepository.findById(id);
+      Role adminRole = this.roleRepository.findByRole("ADMIN");
+      Role userRole = this.roleRepository.findByRole("USER");
+      
+      CodebattlesUser user = optionalUser.get();
+      
+      if (user != null) {
+        Set<Role> roles = user.getRoles();
+        Set<Role> newRoles = new HashSet<>();
+
+        if (roles.contains(adminRole) && inc < 0) {
+          newRoles.add(userRole);
+        } else if (roles.contains(userRole) && inc > 0) {
+          newRoles.add(adminRole);
+        }
+        
+        user.setRoles(newRoles);
+        this.userRepository.save(user);
+      }
+      
     }
 
 }

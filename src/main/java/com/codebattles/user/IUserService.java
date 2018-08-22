@@ -16,4 +16,5 @@ public interface IUserService {
     public void saveUser(CodebattlesUser user);
     public void updateUserScore(String email, Long points);
     public List<CodebattlesUser> getAllUsers();
+    public void changeUserRole(String id, int inc);
 }

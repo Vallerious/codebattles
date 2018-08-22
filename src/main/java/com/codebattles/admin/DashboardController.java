@@ -1,13 +1,25 @@
 package com.codebattles.admin;
 
+import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.codebattles.BaseController;
 import com.codebattles.practice.IPracticeProblemService;
+import com.codebattles.role.Role;
+import com.codebattles.user.CodebattlesUser;
 import com.codebattles.user.IUserService;
+import com.codebattles.user.UserRepository;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 @Controller
 public class DashboardController extends BaseController {
@@ -23,5 +35,19 @@ public class DashboardController extends BaseController {
     return this.basicViewWithData("dashboard", new AdminModelView(
         this.userService.getAllUsers(), this.practiceProblemService.getProblems())
     );
+  }
+  
+  @RequestMapping(value="/dashboard/user/promote/{id}", method=RequestMethod.POST)
+  @ResponseBody
+  public ModelAndView promoteUser(@PathVariable String id) {
+    this.userService.changeUserRole(id, 1);
+    return this.index();
+  }
+  
+  @RequestMapping(value="/dashboard/user/demote/{id}", method=RequestMethod.POST)
+  @ResponseBody
+  public ModelAndView demoteUser(@PathVariable String id) {
+    this.userService.changeUserRole(id, -1);
+    return this.index();
   }
 }

@@ -53,20 +53,18 @@ public class PracticeController extends BaseController {
 
     String[] res = this.practiceProblemService.checkProblems(code, id, problemName);
     
-    System.out.print(res[0] + " ; " + res[1]);
-    
     String status = res[0];
     
     if (status.equals("success")) {
       PracticeProblem practiceProblem = this.practiceProblemService.getProblem(id);
       CodebattlesUser user = this.getCurrentUser();
-      String userId = user.getId();
-      Long userPoints = user.getRating();
-      PracticeSuccessViewModel practiceSuccessViewModel = new PracticeSuccessViewModel();
-      practiceSuccessViewModel.setUserId(userId);
-      practiceSuccessViewModel.setPointsWon(practiceProblem.getPoints());
-      practiceSuccessViewModel.setTotalPoints(userPoints + practiceProblem.getPoints());
-      practiceSuccessViewModel.setProblemName(problemName);
+
+      PracticeSuccessViewModel practiceSuccessViewModel = new PracticeSuccessViewModel(
+          practiceProblem.getPoints(),
+          user.getId(),
+          user.getRating() + practiceProblem.getPoints(),
+          problemName
+      );
 
       this.userService.updateUserScore(user.getEmail(), practiceProblem.getPoints());
       

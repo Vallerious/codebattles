@@ -7,7 +7,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class PagingSortingURLParamsInterceptor extends HandlerInterceptorAdapter {
   
-  private static final int PAGE_SIZE = 10;
+  private static final int PAGE_SIZE = 5;
 
   @Override
   public boolean preHandle(

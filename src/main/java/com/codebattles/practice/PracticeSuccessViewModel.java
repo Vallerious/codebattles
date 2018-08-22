@@ -9,6 +9,14 @@ public class PracticeSuccessViewModel {
   
   private String problemName;
 
+  public PracticeSuccessViewModel(Long pointsWon, String userId, Long totalPoints, String problemName) {
+    super();
+    this.pointsWon = pointsWon;
+    this.userId = userId;
+    this.totalPoints = totalPoints;
+    this.problemName = problemName;
+  }
+
   public Long getTotalPoints() {
     return totalPoints;
   }

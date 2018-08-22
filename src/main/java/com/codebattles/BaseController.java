@@ -19,6 +19,7 @@ public class BaseController {
     ModelAndView modelAndView = new ModelAndView();
     modelAndView.setViewName("layouts/default");
     modelAndView.addObject("viewName", viewName);
+    modelAndView.addObject("title", viewName);
     
     Authentication authentication = this.getAuth();
 
@@ -35,6 +36,7 @@ public class BaseController {
   public ModelAndView basicViewWithData(String viewName, Object data) {
     ModelAndView modelAndView = this.basicView(viewName);
     modelAndView.addObject("data", data);
+    modelAndView.addObject("title", viewName);
     
     return modelAndView;
   }

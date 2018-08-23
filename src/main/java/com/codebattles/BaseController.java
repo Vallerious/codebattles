@@ -9,6 +9,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.codebattles.user.CodebattlesUser;
 import com.codebattles.user.UserService;
 
+import net.bytebuddy.asm.Advice.This;
+
 @Controller
 public class BaseController {
   
@@ -29,7 +31,6 @@ public class BaseController {
         .anyMatch(r -> r.getAuthority().equals("ADMIN"));
 
     modelAndView.addObject("isAdmin", hasAdminRole);
-//    modelAndView.addObject("currentUserId", )
 
     return modelAndView;
   }

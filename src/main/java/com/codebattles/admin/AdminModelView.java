@@ -14,14 +14,17 @@ public class AdminModelView {
   private List<PracticeProblem> problems;
   
   private List<List<String>> userRoles;
+  
+  private String currentUserId;
 
-  public AdminModelView(List<CodebattlesUser> users, List<PracticeProblem> problems) {
+  public AdminModelView(List<CodebattlesUser> users, List<PracticeProblem> problems, String currentUserId) {
     super();
     setUsers(users);
     this.problems = problems;
     this.userRoles = this.users.stream()
         .map(u -> mapRolesToString(u))
         .collect(Collectors.toList());
+    this.currentUserId = currentUserId;
   }
   
   private List<String> mapRolesToString(CodebattlesUser user) {
@@ -46,5 +49,15 @@ public class AdminModelView {
   public List<List<String>> getUserRoles() {
     return userRoles;
   }
+
+  public String getCurrentUserId() {
+    return currentUserId;
+  }
+
+  public void setCurrentUserId(String currentUserId) {
+    this.currentUserId = currentUserId;
+  }
+  
+  
 
 }

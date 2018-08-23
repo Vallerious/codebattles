@@ -33,7 +33,9 @@ public class DashboardController extends BaseController {
   @RequestMapping("/dashboard")
   public ModelAndView index() {
     return this.basicViewWithData("dashboard", new AdminModelView(
-        this.userService.getAllUsers(), this.practiceProblemService.getProblems())
+        this.userService.getAllUsers(), this.practiceProblemService.getProblems(),
+        this.getCurrentUser().getId()
+        )
     );
   }
   
@@ -46,6 +48,13 @@ public class DashboardController extends BaseController {
   @RequestMapping(value="/dashboard/user/demote/{id}", method=RequestMethod.POST)
   public String demoteUser(@PathVariable String id) {
     this.userService.changeUserRole(id, -1);
+    return "redirect:/dashboard";
+  }
+  
+  @RequestMapping(value="/dashboard/user/delete/{id}", method=RequestMethod.POST)
+  public String deleteUser(@PathVariable String id) {
+    this.userService.deleteUser(id);
+    
     return "redirect:/dashboard";
   }
 }

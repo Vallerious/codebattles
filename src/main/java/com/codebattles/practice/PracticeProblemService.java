@@ -7,8 +7,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.aspectj.util.FileUtil;
@@ -205,6 +208,16 @@ public class PracticeProblemService implements IPracticeProblemService {
     practiceProblem.setSolvedCount(0L);
     
     this.practiceProblemRepository.saveAndFlush(practiceProblem);
+  }
+
+  @Override
+  public Set<String> findSolvedProblems(String userId) {
+    Set<String> ids = this.solvedRepository.findByUserId(userId)
+        .stream()
+        .map(s -> s.getProblem().getId())
+        .collect(Collectors.toSet());
+
+    return ids;
   }
 
 }

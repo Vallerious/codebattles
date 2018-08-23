@@ -18,6 +18,8 @@ import com.codebattles.user.CodebattlesUser;
 @Entity
 @Table(name="solved")
 public class Solved {
+  
+  public Solved() {}
 
   public Solved(CodebattlesUser user, PracticeProblem problem) {
     super();

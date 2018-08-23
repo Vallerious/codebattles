@@ -9,8 +9,10 @@
 		</thead>
 		<tbody>
 			<tr th:each="problem, iter : ${data}">
-				<th scope="row" th:text="${iter.index + 1}"></th>
-			    <td><a th:href="@{'/practice/' + ${problem.id}}" th:text="${problem.name}"></a></td>
+				<td th:classappend="${solvedProblems.contains(problem.id) ? 'bg-success' : ''}" scope="row" th:text="${iter.index + 1}"></td>
+			    <td>
+			    		<a th:href="@{'/practice/' + ${problem.id}}" th:text="${problem.name}"></a>
+			    </td>
 			    <td th:text="${problem.solvedCount}"></td>
 			</tr>
 		</tbody>

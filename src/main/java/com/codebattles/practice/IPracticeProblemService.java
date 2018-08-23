@@ -1,6 +1,7 @@
 package com.codebattles.practice;
 
 import java.util.List;
+import java.util.Set;
 
 import com.codebattles.admin.Problem;
 
@@ -16,4 +17,6 @@ public interface IPracticeProblemService {
   public void incrementSolvedCount(String problemId);
   
   public void addProblem(Problem problem);
+  
+  public Set<String> findSolvedProblems(String userId);
 }

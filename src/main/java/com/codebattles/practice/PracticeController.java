@@ -2,6 +2,9 @@ package com.codebattles.practice;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -37,7 +40,14 @@ public class PracticeController extends BaseController {
   
   @RequestMapping(value = "/practice")
   public ModelAndView index() {
-    return this.basicViewWithData("practice", this.practiceProblemService.getProblems());
+    Set<String> solvedProblems = this.practiceProblemService.findSolvedProblems(this.getCurrentUser().getId());
+    
+    PracticeProblemViewModel practiceProblemViewModel = new PracticeProblemViewModel(
+        solvedProblems,
+        this.practiceProblemService.getProblems()
+    );
+    
+    return this.basicViewWithData("practice", practiceProblemViewModel);
   }
   
   @RequestMapping(value = "/practice/{id}")

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.codebattles.BaseController;
 import com.codebattles.practice.IPracticeProblemService;
+import com.codebattles.practice.PracticeProblem;
 import com.codebattles.role.Role;
 import com.codebattles.user.CodebattlesUser;
 import com.codebattles.user.IUserService;
@@ -33,10 +34,16 @@ public class DashboardController extends BaseController {
   @RequestMapping("/dashboard")
   public ModelAndView index() {
     return this.basicViewWithData("dashboard", new AdminModelView(
-        this.userService.getAllUsers(), this.practiceProblemService.getProblems(),
+        this.userService.getAllUsers(),
+        this.practiceProblemService.getProblems(),
         this.getCurrentUser().getId()
         )
     );
+  }
+  
+  @RequestMapping("/dashboard/problem/create")
+  public ModelAndView createProblem() {
+    return this.basicViewWithData("add-problem", new PracticeProblem());
   }
   
   @RequestMapping(value="/dashboard/user/promote/{id}", method=RequestMethod.POST)

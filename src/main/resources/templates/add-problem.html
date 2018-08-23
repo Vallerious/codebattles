@@ -1,0 +1,30 @@
+<form th:action="@{/dashboard/problem/create}" method="POST" th:fragment="common(data)" th:object="${data}" class="col-6">
+	<th:block th:replace="fragments/form/xinput (type='text', id='name-field', placeholder='Enter problem name', label='Name', name='name')"></th:block>
+	
+	<div class="form-group">
+   		<label for="description">Description</label>
+    		<textarea class="form-control" name="description" id="description" rows="8"></textarea>
+ 	</div>
+ 	
+ 	<th:block th:replace="fragments/form/xinput (type='number', id='points-field', placeholder='Enter points reward', label='Points', name='points')"></th:block>
+ 	
+ 	<div class="row">
+ 		<div class="form-group col-6" th:each="i : ${#numbers.sequence(0, 9)}">
+		 	<div th:if="${i % 2 == 0}">
+		 		<div class="form-group">
+				 	<label th:for="${'input-' + i}" th:text="Input"></label>
+				  	<input th:type="text" th:name="input" class="form-control" th:id="${'input-' + i}" placeholder="Input data" required />
+				</div>
+		 	</div>
+		 	<div th:if="${i % 2 != 0}">
+		 		<div class="form-group">
+				 	<label th:for="${'output-' + (i - 1)}" th:text="Output"></label>
+				  	<input th:type="text" th:name="output" class="form-control" th:id="${'output-' + (i - 1)}" placeholder="Output data" required />
+				</div>
+		 	</div>
+		</div>
+ 	</div>
+ 	<div class="form-group text-center">
+ 		<button type="submit" class="btn btn-primary">Save</button>
+ 	</div>
+</form>

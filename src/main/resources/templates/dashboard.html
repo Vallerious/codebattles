@@ -9,7 +9,7 @@
 	</ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-  	<th:block th:replace="fragments/usertable :: usertable(data=${data.users}, isAdmin=true)"></th:block>
+  	<th:block th:replace="fragments/usertable :: usertable(data=${data.users}, isAdmin=true, userRoles=${data.userRoles})"></th:block>
   </div>
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
   	<th:block th:replace="fragments/problemtable :: problemtable(data=${data.problems})"></th:block>

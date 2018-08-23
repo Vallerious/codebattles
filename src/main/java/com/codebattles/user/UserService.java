@@ -94,12 +94,13 @@ public class UserService implements IUserService {
 
         if (roles.contains(adminRole) && inc < 0) {
           newRoles.add(userRole);
+          user.setRoles(newRoles);
+          this.userRepository.save(user);
         } else if (roles.contains(userRole) && inc > 0) {
           newRoles.add(adminRole);
+          user.setRoles(newRoles);
+          this.userRepository.save(user);
         }
-        
-        user.setRoles(newRoles);
-        this.userRepository.save(user);
       }
       
     }

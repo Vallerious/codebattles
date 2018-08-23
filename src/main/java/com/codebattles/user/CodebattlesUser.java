@@ -2,6 +2,7 @@ package com.codebattles.user;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -117,6 +118,10 @@ public class CodebattlesUser {
     this.rating = rating;
   }
   
-  
+  public boolean isAdmin() {
+    return this.roles.stream()
+        .filter(r -> r.getRole().equals("ADMIN"))
+        .collect(Collectors.toList()).size() > 0;
+  }
 
 }

@@ -6,7 +6,7 @@
 				<th scope="col">Username</th>
 				<th scope="col">Email</th>
 				<th scope="col">Rating</th>
-				<th scope="col" th:if="${isAdmin}">Roles</th>
+				<th scope="col" th:if="${isAdmin && userRoles != null}">Roles</th>
 				<th scope="col" th:if="${isAdmin}"></th>
 				<th scope="col" th:if="${isAdmin}"></th>
 				<th scope="col" th:if="${isAdmin}"></th>
@@ -18,7 +18,7 @@
 			    <td th:text="${user.username}"></td>
 			    <td th:text="${user.email}"></td>
 			    <td th:text="${user.rating}"></td>
-			    <td th:if="${isAdmin}" th:text="${#strings.listJoin(userRoles[iter.index], ',')}"></td>
+			    <td th:if="${isAdmin && userRoles != null}" th:text="${#strings.listJoin(userRoles[iter.index], ',')}"></td>
 			    <td th:if="${isAdmin}"><button th:if="${!user.isAdmin()}" class="btn btn-danger">Delete</button></td>
 			    <td th:if="${isAdmin}">
 			    		<form th:action="@{'/dashboard/user/promote/' + ${user.id}}" method="POST">

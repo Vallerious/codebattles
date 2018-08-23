@@ -38,16 +38,14 @@ public class DashboardController extends BaseController {
   }
   
   @RequestMapping(value="/dashboard/user/promote/{id}", method=RequestMethod.POST)
-  @ResponseBody
-  public ModelAndView promoteUser(@PathVariable String id) {
+  public String promoteUser(@PathVariable String id) {
     this.userService.changeUserRole(id, 1);
-    return this.index();
+    return "redirect:/dashboard";
   }
   
   @RequestMapping(value="/dashboard/user/demote/{id}", method=RequestMethod.POST)
-  @ResponseBody
-  public ModelAndView demoteUser(@PathVariable String id) {
+  public String demoteUser(@PathVariable String id) {
     this.userService.changeUserRole(id, -1);
-    return this.index();
+    return "redirect:/dashboard";
   }
 }

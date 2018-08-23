@@ -29,6 +29,7 @@ public class BaseController {
         .anyMatch(r -> r.getAuthority().equals("ADMIN"));
 
     modelAndView.addObject("isAdmin", hasAdminRole);
+//    modelAndView.addObject("currentUserId", )
 
     return modelAndView;
   }

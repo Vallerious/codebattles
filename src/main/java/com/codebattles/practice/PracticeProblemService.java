@@ -43,7 +43,7 @@ public class PracticeProblemService implements IPracticeProblemService {
   public String[] checkProblem(String problemCode, String problemId, String problemName, int testCase) {
     // Store code on disk with some random name
     String[] res = new String[2];
-    Random random = new Random();
+
     long randomNameToken = System.currentTimeMillis();
 //    String fileName = problemId + randomNameToken;
     String fileName = "Main" + randomNameToken;

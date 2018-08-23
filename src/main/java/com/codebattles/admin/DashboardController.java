@@ -1,10 +1,12 @@
 package com.codebattles.admin;
 
+import java.awt.PageAttributes.MediaType;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,8 +44,16 @@ public class DashboardController extends BaseController {
   }
   
   @RequestMapping("/dashboard/problem/create")
-  public ModelAndView createProblem() {
+  public ModelAndView getCreateProblemPage() {
     return this.basicViewWithData("add-problem", new PracticeProblem());
+  }
+  
+  @ResponseBody
+  @RequestMapping(value="/dashboard/problem/create", method=RequestMethod.POST)
+  public String createProblem(@RequestBody Problem problem) {
+    this.practiceProblemService.addProblem(problem);
+    
+    return "pesho";
   }
   
   @RequestMapping(value="/dashboard/user/promote/{id}", method=RequestMethod.POST)

@@ -72,7 +72,7 @@ public class PracticeController extends BaseController {
       PracticeSuccessViewModel practiceSuccessViewModel = new PracticeSuccessViewModel(
           isProblemAlreadySolved ? 0 : practiceProblem.getPoints(),
           user.getId(),
-          isProblemAlreadySolved ? user.getRating() : user.getRating() + practiceProblem.getPoints(),
+          user.getRating(),
           problemName
       );
 

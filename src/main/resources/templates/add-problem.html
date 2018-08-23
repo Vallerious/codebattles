@@ -1,4 +1,4 @@
-<form th:action="@{/dashboard/problem/create}" method="POST" th:fragment="common(data)" th:object="${data}" class="col-6">
+<form th:fragment="common(data)" th:object="${data}" class="col-6" id="add-problem-form">
 	<th:block th:replace="fragments/form/xinput (type='text', id='name-field', placeholder='Enter problem name', label='Name', name='name')"></th:block>
 	
 	<div class="form-group">
@@ -25,6 +25,49 @@
 		</div>
  	</div>
  	<div class="form-group text-center">
- 		<button type="submit" class="btn btn-primary">Save</button>
+ 		<button type="button" id="submit-form-btn" class="btn btn-primary">Save</button>
  	</div>
+ 	<script>
+ 		// <![CDATA[
+ 			let btn = document.getElementById('submit-form-btn')
+ 			
+ 			btn.addEventListener('click', onFormSubmit)
+ 			
+ 			function onFormSubmit(e) {
+ 				let nameFieldValue = document.getElementById('name-field').value
+ 				let descFieldValue = document.getElementById('description').value
+ 				let pointsFieldValue = document.getElementById('points-field').value
+ 				let inputOutputs = []
+ 				
+ 				for (let i = 0; i <= 8; i+=2) {
+ 					let inputValue = document.getElementById(`input-${i}`).value
+ 					let outputValue = document.getElementById(`output-${i}`).value
+ 					
+ 					inputOutputs.push({inputValue, outputValue})
+ 				}
+ 				
+ 				let isValid = nameFieldValue && descFieldValue && pointsFieldValue
+ 				
+ 				inputOutputs.forEach(io => io.inputValue && io.outputValue ? io : isValid = false)
+ 				
+ 				if (!isValid) {
+ 					alert('Please fill all fields')
+ 				} else {
+ 					let backendPackage = {
+ 						name: nameFieldValue,
+ 						description: descFieldValue,
+ 						points: pointsFieldValue,
+ 						inputOutputs
+ 					}
+ 					
+ 					$.ajax({
+ 						url: '/dashboard/problem/create',
+ 						method: 'POST',
+ 						data: JSON.stringify(backendPackage),
+ 						contentType: 'application/json'
+ 					})
+ 				}
+ 			}
+ 		// ]]>
+ 	</script>
 </form>

@@ -16,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.codebattles.admin.InputOutput;
+import com.codebattles.admin.Problem;
+
 @Service
 public class PracticeProblemService implements IPracticeProblemService {
 
@@ -165,6 +168,43 @@ public class PracticeProblemService implements IPracticeProblemService {
       practiceProblem.setSolvedCount(practiceProblem.getSolvedCount() + 1);
       this.practiceProblemRepository.saveAndFlush(practiceProblem);
     }
+  }
+
+  @Override
+  public void addProblem(Problem problem) {
+    // Lets first save the test cases
+    
+    // 1. Create the folders
+    String rootPath = System.getProperty("user.dir");
+    new File(rootPath + "/src/main/resources/problems/" + problem.getName() + "/input").mkdirs();
+    new File(rootPath + "/src/main/resources/problems/" + problem.getName() + "/output").mkdirs();
+    
+    // 2. Save the test cases
+    List<InputOutput> ios = problem.getInputOutputs();
+    
+    for (int i = 1; i <= ios.size(); i++) {
+      File fileInput = new File(rootPath + "/src/main/resources/problems/" + problem.getName() + "/input/test0" + i + ".txt");
+      File fileOutput = new File(rootPath + "/src/main/resources/problems/" + problem.getName() + "/output/test0" + i + ".txt");
+      
+      try {
+        fileInput.createNewFile();
+        fileOutput.createNewFile();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      
+      FileUtil.writeAsString(fileInput, ios.get(i - 1).getInputValue());
+      FileUtil.writeAsString(fileOutput, ios.get(i - 1).getOutputValue());
+    }
+    
+    // 3. Save the problem to DB
+    PracticeProblem practiceProblem = new PracticeProblem();
+    practiceProblem.setName(problem.getName());
+    practiceProblem.setDescription(problem.getDescription());
+    practiceProblem.setPoints(problem.getPoints());
+    practiceProblem.setSolvedCount(0L);
+    
+    this.practiceProblemRepository.saveAndFlush(practiceProblem);
   }
 
 }

@@ -206,8 +206,9 @@ public class PracticeProblemService implements IPracticeProblemService {
       FileUtil.writeAsString(fileInput, ios.get(i - 1).getInputValue());
       FileUtil.writeAsString(fileOutput, ios.get(i - 1).getOutputValue());
     }
-    
-    // 3. Save the problem to DB
+  }
+
+  public void saveProblemToDB(Problem problem) {
     PracticeProblem practiceProblem = new PracticeProblem();
     practiceProblem.setName(problem.getName());
     practiceProblem.setDescription(problem.getDescription());

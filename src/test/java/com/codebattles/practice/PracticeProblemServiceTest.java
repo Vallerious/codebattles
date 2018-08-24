@@ -1,6 +1,9 @@
 package com.codebattles.practice;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.codebattles.admin.models.InputOutput;
 import com.codebattles.admin.models.Problem;
+import com.codebattles.practice.repositories.PracticeProblemRepository;
 import com.codebattles.practice.services.PracticeProblemService;
 
 @RunWith(SpringRunner.class)

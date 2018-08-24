@@ -21,4 +21,6 @@ public interface IPracticeProblemService {
   public void addProblem(Problem problem) throws IOException;
   
   public Set<String> findSolvedProblems(String userId);
+  
+  public void saveProblemToDB(Problem problem);
 }

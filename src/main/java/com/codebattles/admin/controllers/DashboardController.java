@@ -60,6 +60,7 @@ public class DashboardController extends BaseController {
   public String createProblem(@RequestBody Problem problem) {
     try {
       this.practiceProblemService.addProblem(problem);
+      this.practiceProblemService.saveProblemToDB(problem);
     } catch (IOException e) {
       return "Sorry we could not add the problem";
     }

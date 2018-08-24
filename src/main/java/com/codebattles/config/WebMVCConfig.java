@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.codebattles.ranking.PagingSortingURLParamsInterceptor;
+import com.codebattles.ranking.interceptors.PagingSortingURLParamsInterceptor;
 
 @Configuration
 public class WebMVCConfig extends WebMvcConfigurerAdapter {

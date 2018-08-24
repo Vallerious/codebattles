@@ -6,8 +6,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.codebattles.user.CodebattlesUser;
-import com.codebattles.user.UserService;
+import com.codebattles.user.models.CodebattlesUser;
+import com.codebattles.user.services.UserService;
 
 import net.bytebuddy.asm.Advice.This;
 

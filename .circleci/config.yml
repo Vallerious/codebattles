@@ -13,9 +13,9 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/mysql:latest
-	      environment:
-	        MYSQL_USER: vallerious
-	        MYSQL_PASSWORD: [pashwerd]
+        environment:
+          MYSQL_USER: vallerious
+          MYSQL_PASSWORD: [pashwerd]
     working_directory: ~/repo
 
     environment:

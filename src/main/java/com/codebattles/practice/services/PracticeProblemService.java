@@ -178,8 +178,11 @@ public class PracticeProblemService implements IPracticeProblemService {
   }
 
   @Override
-  public void addProblem(Problem problem) {
+  public void addProblem(Problem problem) throws IOException {
     // Lets first save the test cases
+    if (problem.getName().isEmpty() || problem.getInputOutputs().size() != 5) {
+      throw new IOException();
+    }
     
     // 1. Create the folders
     String rootPath = System.getProperty("user.dir");

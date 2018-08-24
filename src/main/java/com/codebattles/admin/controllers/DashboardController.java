@@ -1,6 +1,7 @@
 package com.codebattles.admin.controllers;
 
 import java.awt.PageAttributes.MediaType;
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -57,7 +58,11 @@ public class DashboardController extends BaseController {
   @ResponseBody
   @RequestMapping(value="/dashboard/problem/create", method=RequestMethod.POST)
   public String createProblem(@RequestBody Problem problem) {
-    this.practiceProblemService.addProblem(problem);
+    try {
+      this.practiceProblemService.addProblem(problem);
+    } catch (IOException e) {
+      return "Sorry we could not add the problem";
+    }
     
     return "pesho";
   }

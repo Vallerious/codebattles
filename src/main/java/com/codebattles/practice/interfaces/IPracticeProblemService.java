@@ -1,5 +1,6 @@
 package com.codebattles.practice.interfaces;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ public interface IPracticeProblemService {
   
   public void incrementSolvedCount(String problemId);
   
-  public void addProblem(Problem problem);
+  public void addProblem(Problem problem) throws IOException;
   
   public Set<String> findSolvedProblems(String userId);
 }

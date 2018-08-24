@@ -15,7 +15,7 @@ jobs:
       - image: circleci/mysql:latest
         environment:
           MYSQL_USER: vallerious
-          MYSQL_PASSWORD: [pashwerd]
+          MYSQL_PASSWORD: '[pashwerd]'
     working_directory: ~/repo
 
     environment:

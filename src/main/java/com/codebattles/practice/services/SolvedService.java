@@ -3,10 +3,6 @@ package com.codebattles.practice.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.management.Query;
-import javax.websocket.Session;
-
-import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +12,6 @@ import com.codebattles.practice.models.Solved;
 import com.codebattles.practice.repositories.PracticeProblemRepository;
 import com.codebattles.practice.repositories.SolvedRepository;
 import com.codebattles.user.models.CodebattlesUser;
-import com.mysql.fabric.xmlrpc.base.Array;
 
 @Service
 public class SolvedService implements ISolvedService {

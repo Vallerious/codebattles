@@ -19,10 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.codebattles.admin.models.InputOutput;
-import com.codebattles.admin.models.Problem;
-import com.codebattles.practice.repositories.PracticeProblemRepository;
-import com.codebattles.practice.services.PracticeProblemService;
+import com.codebattles.models.InputOutput;
+import com.codebattles.models.Problem;
+import com.codebattles.repositories.PracticeProblemRepository;
+import com.codebattles.services.PracticeProblemService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

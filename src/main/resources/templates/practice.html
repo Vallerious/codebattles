@@ -1,3 +1,3 @@
 <div th:fragment="common(data)">
-	<th:block th:replace="fragments/problemtable :: problemtable(data=${data.problems}, solvedProblems=${data.solvedProblems})"></th:block>
+	<th:block th:replace="fragments/tables/problemtable :: problemtable(data=${data.problems}, solvedProblems=${data.solvedProblems})"></th:block>
 </div>

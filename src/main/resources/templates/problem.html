@@ -1,38 +1,13 @@
 <div th:fragment="common(data)">
 	<h1 th:text="${data.practiceProblem.name}"></h1>
+	
+	<div class="alert alert-danger" role="alert" th:text="${data.error}" th:if="${!data.error.isEmpty()}"></div>
+	
 	<p th:text="${data.practiceProblem.description}"></p>
 	
-	<p><strong>Input</strong></p>
-	<p>Input will be passed via command line arguments:</p>
-	<pre>
-		<code data-language="java">
-public static void main(String[] args) {    
-    // write your solution here
-    
-    String firstArg = args[0] // 3
-    String secondArg = args[1] // 5
- }
-		</code>
-	</pre>
+	<th:block th:replace="fragments/common/codesamples"></th:block>
 	
-	<p><strong>Output</strong></p>
-	<p>Write your solution result using System.out.println:</p>
-	<pre>
-		<code data-language="java">
-public static void main(String[] args) {    
-    // write your solution here
-    
-    String firstArg = args[0]; // 3
-    String secondArg = args[1]; // 5
-    
-    System.out.println(firstArg + secondArg);
- }
-		</code>
-	</pre>
-	
-	<div class="alert alert-danger" role="alert" th:text="${data.error}" th:if="${!data.error.isEmpty()}"></div>	
-	
-	<form th:method="POST">
+	<form th:method="POST" th:action="@{'/practice/' + ${data.practiceProblem.id}}">
 		<div class="form-group">
 	    		<label for="solution">Solution</label>
 		    <textarea class="form-control" name="solution" id="solution" rows="10" th:field="${data.initialSourceCode}"></textarea>

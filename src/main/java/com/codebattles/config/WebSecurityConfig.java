@@ -45,7 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
       http
           .cors().disable()
-          .csrf().disable()
           .authorizeRequests()
               .antMatchers("/", "/ranking", "/register", "/libs/**").permitAll()
               .antMatchers("/dashboard").hasAuthority("ADMIN")

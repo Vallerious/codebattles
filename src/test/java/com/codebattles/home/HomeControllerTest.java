@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.codebattles.home.controllers.HomeController;
+import com.codebattles.controllers.HomeController;
 
 public class HomeControllerTest {
   

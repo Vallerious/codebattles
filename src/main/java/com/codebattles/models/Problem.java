@@ -2,7 +2,11 @@ package com.codebattles.models;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 public class Problem {
+  
+  @NotNull(message = "*Name is required")
   private String name;
   
   private String description;

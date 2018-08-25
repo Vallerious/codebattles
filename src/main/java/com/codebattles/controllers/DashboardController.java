@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +57,7 @@ public class DashboardController extends BaseController {
   
   @ResponseBody
   @RequestMapping(value="/problem/create", method=RequestMethod.POST)
-  public String createProblem(@RequestBody Problem problem) {
+  public String createProblem(@Valid @RequestBody Problem problem, BindingResult bindingResult) {
     try {
       this.practiceProblemService.addProblem(problem);
       this.practiceProblemService.saveProblemToDB(problem);

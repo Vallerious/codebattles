@@ -44,15 +44,15 @@ public class RegisterController extends BaseController {
         bindingResult.rejectValue("username", "error.user", "*There is already a user registered with this username");
       }
       
+      modelAndView.setViewName("layouts/default");
+
       if (bindingResult.hasErrors()) {
-          modelAndView.setViewName("layouts/default");
-          modelAndView.addObject("viewName", "register");
           modelAndView.addObject("data", new CodebattlesUser());
           modelAndView.addObject("errors", bindingResult.getAllErrors());
+          modelAndView.addObject("viewName", "register");
       } else {
           userService.saveUser(user);
           modelAndView.addObject("successMessage", "User has been registered successfully");
-          modelAndView.setViewName("layouts/default");
           modelAndView.addObject("viewName", "login");
       }
 
